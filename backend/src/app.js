@@ -2,8 +2,14 @@ import express from 'express';
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger.js";
 import authRoutes from "./routes/auth.routes.js";
-
+import cors from "cors";
 const app = express();
+app.use(cors({
+  origin: "http://localhost:5173",  // allow your frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 
 // Middleware
 
@@ -36,6 +42,6 @@ app.use((err, req, res, next) => {
 });
 
 
-app.use("/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 
 export default app;

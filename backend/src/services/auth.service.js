@@ -28,8 +28,12 @@ export const loginUser = async (email, password) => {
   return { user: { id: user.id, email: user.email}, token };
 };
 
+export const forgetpassword = async (Email) => {
+  const user = await findUserByEmail(Email);
+  if (!user) throw new Error("User not found");
 
-
+  await updatepassword(user.id, newPassword);
+};
 
 // generate token 
 /**

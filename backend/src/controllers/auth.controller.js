@@ -24,3 +24,14 @@ export const login = async (req, res, next) => {
     res.status(401).json({ message: error.message });
   }
 };
+
+
+export const forgetpassword = async (req, res, next) => {
+  try {
+    const { email, newPassword } = req.body;
+    await forgetpassword(email, newPassword);
+    res.status(200).json({ message: "Password reset successful" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};

@@ -1,5 +1,5 @@
 import express from "express";
-import { login,register } from "../controllers/auth.controller.js";
+import { login,register,forgetpassword } from "../controllers/auth.controller.js";
 import { authGuard } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
@@ -70,12 +70,38 @@ router.post("/register", register);
  *         description: Invalid credentials
  */
 router.post("/login", login);
+
+/**
+ * @swagger
+ * /auth/forgot-password:
+ *   post:
+ *     summary: Request password reset link
+ *     tags:
+ *       - Auth
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: user@gmail.com
+ *     responses:
+ *       200:
+ *         description: Reset link sent
+ *       404:
+ *         description: Email not found
+ */
+
+router.post("/forgot-password", forgetpassword);
 router.get(
   "/",
   authGuard,
   
   
 );
-
-
 export default router;

@@ -23,3 +23,12 @@ export const findUserByEmail = async (email) => {
   const [rows] = await db.execute("SELECT * FROM users WHERE email = ?", [email]);
   return rows[0];
 };
+
+export const updatepassword = async (userId, newPassword) => {
+  const hashedPassword = await bcrypt.hash(newPassword, SALT_ROUNDS);
+  const [result] = await db.execute(
+    "UPDATE users SET hashedPassword = ? WHERE id = ?",
+    [hashedPassword, userId]
+  );
+  return result;
+};
