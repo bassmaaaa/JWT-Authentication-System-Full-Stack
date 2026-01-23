@@ -1,9 +1,21 @@
-import dotenv from "dotenv";
-dotenv.config(); // loads .env
+import dotenv from 'dotenv';
+dotenv.config();
 
-export const PORT = process.env.PORT || 5000;
-export const JWT_SECRET = process.env.JWT_SECRET;
-export const DB_HOST = process.env.DB_HOST;
-export const DB_USER = process.env.DB_USER;
-export const DB_PASSWORD = process.env.DB_PASSWORD;
-export const DB_NAME = process.env.DB_NAME;
+const env = {
+  port: process.env.PORT || 5000,
+  db: {
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_NAME || 'auth',
+    port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 3306,
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET || 'your_secret_key',
+    expires: process.env.JWT_EXPIRES || '1h', // 1 hour default
+  },
+};
+
+
+
+export default env;

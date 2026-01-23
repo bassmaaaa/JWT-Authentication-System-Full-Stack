@@ -1,15 +1,15 @@
 import mysql from "mysql2/promise";
-import { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } from "./env.js";
+import  env  from "./env.js";
 
 export let db;
 
 export const connectDB = async () => {
   try {
     db = await mysql.createConnection({
-      host: DB_HOST,
-      user: DB_USER,
-      password: DB_PASSWORD,
-      database: DB_NAME,
+      host: env.db.host,
+      user: env.db.user,
+      password: env.db.password,
+      database: env.db.database,
     });
     console.log("MySQL connected successfully");
   } catch (error) {
